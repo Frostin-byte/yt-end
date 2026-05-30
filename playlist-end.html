@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HFY Next 3 – konec playlistu</title>
+</head>
+<body>
+<script>
+const playlist = "PLCr6x4YIguwsNM02WPSMc70NZMiQbME-D";
+
+async function redirectToLastVideo() {
+  try {
+    const response = await fetch(`https://www.youtube.com/playlist?list=${playlist}`);
+    const text = await response.text();
+    const matches = text.match(/data-index="\d+"/g) || [];
+    const count = matches.length;
+    window.location.href = `https://www.youtube.com/playlist?list=${playlist}&index=${count}`;
+  } catch (e) {
+    alert("Nepodařilo se načíst playlist. Zkus to znovu.");
+  }
+}
+
+redirectToLastVideo();
+</script>
+</body>
+</html>
